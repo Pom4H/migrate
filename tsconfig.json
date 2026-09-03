@@ -25,7 +25,6 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": false,
     "noEmit": true,
-    "baseUrl": ".",
     "paths": {
       "@pom4h/migrate": [
         "./src/index.ts"
