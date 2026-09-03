@@ -1,0 +1,7 @@
+node_modules/
+dist/
+coverage/
+.migrate/raw/
+.migrate/state/
+*.tmp-*
+.DS_Store
