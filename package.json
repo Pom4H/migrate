@@ -1,0 +1,68 @@
+{
+  "name": "@pom4h/migrate",
+  "version": "0.1.0",
+  "description": "Migration-as-code for replacing live legacy web products without freezing the source.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Roman Popov",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pom4H/migrate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Pom4H/migrate/issues"
+  },
+  "homepage": "https://github.com/Pom4H/migrate#readme",
+  "keywords": [
+    "migration",
+    "migration-as-code",
+    "website",
+    "legacy",
+    "content",
+    "scraper",
+    "sync",
+    "bun",
+    "typescript"
+  ],
+  "sideEffects": false,
+  "bin": {
+    "migrate": "./dist/bin.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "clean": "bun -e \"await (await import('node:fs/promises')).rm('dist', { recursive: true, force: true })\"",
+    "build": "bun run clean && bun build src/index.ts --outfile dist/index.js --target bun --format esm --packages external --sourcemap=external && bun build src/bin.ts --outfile dist/bin.js --target bun --format esm --packages external --sourcemap=external && tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "bun test",
+    "test:watch": "bun test --watch",
+    "verify": "bun run typecheck && bun test && bun run build",
+    "prepublishOnly": "bun run verify"
+  },
+  "dependencies": {
+    "cheerio": "^1.2.0"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.0",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "bun": ">=1.4.0"
+  },
+  "packageManager": "bun@1.4.0",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
