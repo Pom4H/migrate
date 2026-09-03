@@ -47,7 +47,8 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "bun test",
     "test:watch": "bun test --watch",
-    "verify": "bun run typecheck && bun test && bun run build",
+    "smoke": "bun run scripts/package-smoke.ts",
+    "verify": "bun run typecheck && bun test && bun run build && bun run smoke",
     "prepublishOnly": "bun run verify"
   },
   "dependencies": {

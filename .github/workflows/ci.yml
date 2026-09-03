@@ -25,3 +25,6 @@ jobs:
 
       - name: Verify package
         run: bun run verify
+
+      - name: Inspect npm tarball
+        run: npm pack --dry-run
