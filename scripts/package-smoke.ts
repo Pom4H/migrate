@@ -11,7 +11,7 @@ for (const exported of ["defineMigration", "entity", "field", "website", "syncMi
 }
 
 const cli = Bun.spawnSync({
-  cmd: [process.execPath, fileURLToPath(cliUrl), "--version"],
+  cmd: [process.execPath, "run", fileURLToPath(cliUrl), "--version"],
   stdout: "pipe",
   stderr: "pipe",
 });
