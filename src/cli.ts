@@ -122,12 +122,12 @@ async function writeCi(cwd: string, force: boolean): Promise<void> {
 
 export async function main(argv = process.argv.slice(2)): Promise<number> {
   const parsed = parseArguments(argv);
-  if (parsed.flags.has("help") || parsed.command === "help") {
-    console.log(HELP);
-    return 0;
-  }
   if (parsed.flags.has("version") || parsed.command === "version") {
     console.log(VERSION);
+    return 0;
+  }
+  if (parsed.flags.has("help") || parsed.command === "help") {
+    console.log(HELP);
     return 0;
   }
 
