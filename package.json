@@ -49,6 +49,7 @@
     "test:watch": "bun test --watch",
     "smoke": "bun run scripts/package-smoke.ts",
     "verify": "bun run typecheck && bun test && bun run build && bun run smoke",
+    "prepare": "bun run build",
     "prepublishOnly": "bun run verify"
   },
   "dependencies": {
