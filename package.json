@@ -43,7 +43,7 @@
   ],
   "scripts": {
     "clean": "bun -e \"await (await import('node:fs/promises')).rm('dist', { recursive: true, force: true })\"",
-    "build": "bun run clean && bun build src/index.ts --outfile dist/index.js --target bun --format esm --packages external --sourcemap=external && bun build src/bin.ts --outfile dist/bin.js --target bun --format esm --packages external --sourcemap=external && tsc -p tsconfig.build.json",
+    "build": "bun run clean && bun build src/index.ts --outdir dist --target bun --format esm --packages external --sourcemap=external && bun build src/bin.ts --outdir dist --target bun --format esm --packages external --sourcemap=external && tsc -p tsconfig.build.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "bun test",
     "test:watch": "bun test --watch",
