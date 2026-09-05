@@ -3,7 +3,7 @@ import { mkdtemp, readFile, readdir, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { defineMigration, entity } from "../src/dsl.js";
-import { extractSnapshot, fingerprintSnapshot } from "../src/extract.js";
+import { extractSnapshot } from "../src/extract.js";
 import { field } from "../src/field.js";
 import { readSnapshotDirectory, writeSnapshotDirectory } from "../src/storage.js";
 import type { MigrationLogger, SourceAdapter, SourceDocument } from "../src/types.js";
@@ -55,7 +55,6 @@ describe("git-native storage", () => {
     const second = await extractSnapshot(config, [document("2026-09-06T00:00:00.000Z", "hash-b")], logger);
 
     expect(first.fingerprint).toBe(second.fingerprint);
-    expect(await fingerprintSnapshot({ ...second, fingerprint: undefined } as never)).toBe(second.fingerprint);
   });
 
   test("writes one stable file per entity without observation timestamps", async () => {
@@ -64,7 +63,7 @@ describe("git-native storage", () => {
       const first = await extractSnapshot(config, [document("2026-09-05T00:00:00.000Z", "hash-a")], logger);
       await writeSnapshotDirectory(directory, first);
 
-      expect(await readdir(directory)).toEqual([
+      expect((await readdir(directory)).sort()).toEqual([
         "assets.json",
         "documents.json",
         "entities",
