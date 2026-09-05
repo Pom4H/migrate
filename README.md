@@ -185,20 +185,26 @@ content/overrides.ts          human-owned patches
 content/resolved/             generated data with patches applied
 ```
 
-Each generated and resolved directory contains:
+Each generated and resolved directory uses a Git-native representation:
 
 ```text
 manifest.json
-snapshot.json
+documents.json
 routes.json
 assets.json
 entities/
-  product.json
-  article.json
-  page.json
+  product/
+    sample-product-3e41c32c802a.json
+    another-product-ef86f763d83f.json
+  article/
+    migration-notes-7c52a6710b9d.json
 ```
 
-All JSON is written with stable key ordering. Entity identity is `(type, id)`, so formatting changes and crawl order do not create noise.
+Each entity owns one file. Adding a product adds a file; changing one price changes a few lines in one file. This avoids rewriting a giant entity array and also reduces merge conflicts between independent changes.
+
+Fetch timestamps, raw response hashes and per-field observation timestamps are intentionally omitted from this Git-facing representation. They remain available in the immutable raw/state layers, while semantic fingerprints are calculated from normalized entities, routes and assets. Dynamic HTML that does not change the extracted domain therefore produces no generated-content diff.
+
+All JSON is written with stable key ordering. Entity identity is `(type, id)`, so formatting changes and crawl order do not create noise. Existing `0.1` directories containing `snapshot.json` remain readable and are rewritten to the Git-native layout by the next synchronization.
 
 ## Semantic diffs
 
