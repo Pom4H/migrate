@@ -6,14 +6,12 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
-    "check": "astro check"
+    "preview": "astro preview"
   },
   "dependencies": {
     "astro": "^7.1.6"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.10",
     "typescript": "7.0.2"
   },
   "packageManager": "bun@1.4.0"
