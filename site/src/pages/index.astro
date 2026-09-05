@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import "../styles/responsive.css";
 
 const base = import.meta.env.BASE_URL;
 const repo = "https://github.com/Pom4H/migrate";
@@ -7,6 +8,36 @@ const docs = `${repo}#readme`;
 const examples = `${repo}/tree/main/examples`;
 const title = "Migrate — Migration as code for live legacy systems";
 const description = "Keep rebuilding while the legacy system keeps changing. Migrate turns live websites into typed, reviewable domain data with semantic Git diffs and CI checks.";
+const workflowExample = `name: Synchronize migration
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 4 * * *"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.0
+
+      - run: bun install
+      - run: bunx @pom4h/migrate sync --check
+      - run: bun run build
+
+      - uses: peter-evans/create-pull-request@v8
+        with:
+          branch: migrate/source-sync
+          commit-message: "chore(content): synchronize source"
+          title: "chore(content): synchronize source"`;
 ---
 
 <!doctype html>
@@ -39,6 +70,7 @@ const description = "Keep rebuilding while the legacy system keeps changing. Mig
         <nav class="nav-links" aria-label="Primary navigation">
           <a href="#how">How it works</a>
           <a href="#git">Git-native</a>
+          <a href="#actions">Actions</a>
           <a href={docs}>Docs</a>
           <a class="nav-cta" href={repo}>GitHub ↗</a>
         </nav>
@@ -264,6 +296,33 @@ overrides.ts human-owned</span>
               <h3>Diffs agents can reason about</h3>
               <p>Small semantic changes are easier to review, test, summarize, and safely automate in CI.</p>
             </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="actions">
+        <div class="wrap actions-layout">
+          <div class="actions-copy">
+            <div class="kicker">GitHub Actions</div>
+            <h2>Turn migration into a scheduled review loop.</h2>
+            <p>
+              Run the same deterministic sync in CI, build the replacement, then open a pull request only when the normalized domain changes.
+            </p>
+            <ol class="actions-flow">
+              <li><span>01</span><div><strong>Schedule or dispatch</strong><p>Observe the live source daily or on demand.</p></div></li>
+              <li><span>02</span><div><strong>Sync and check</strong><p>Extract entities and fail fast on broken migration invariants.</p></div></li>
+              <li><span>03</span><div><strong>Build the replacement</strong><p>Prove generated content still works in the new product.</p></div></li>
+              <li><span>04</span><div><strong>Open a pull request</strong><p>Review a semantic source diff instead of a giant crawler rewrite.</p></div></li>
+            </ol>
+            <a class="button" href={`${repo}/blob/main/src/templates.ts`}>See generated workflow ↗</a>
+          </div>
+
+          <div class="code-card actions-code" aria-label="GitHub Actions workflow example">
+            <div class="window-bar mono">
+              <span>.github/workflows/migrate.yml</span>
+              <span>scheduled CI</span>
+            </div>
+            <pre><code class="yaml">{workflowExample}</code></pre>
           </div>
         </div>
       </section>
