@@ -97,18 +97,26 @@ async function extractRoute(
   return raw === null ? null : normalizePathname(raw);
 }
 
+/**
+ * Fingerprints represent normalized domain state, not an HTTP observation.
+ * Fetch timestamps, response hashes and provenance timestamps deliberately stay
+ * out of the material so dynamic HTML does not manufacture source changes.
+ */
 export async function fingerprintSnapshot(snapshot: Omit<MigrationSnapshot, "fingerprint">): Promise<string> {
   const material = {
     schemaVersion: snapshot.schemaVersion,
     layer: snapshot.layer,
     migration: snapshot.migration,
-    source: snapshot.source,
-    documents: snapshot.documents.map(({ fetchedAt: _fetchedAt, ...document }) => document),
+    source: {
+      adapter: snapshot.source.adapter,
+      origin: snapshot.source.origin,
+    },
     entities: snapshot.entities.map((entity) => ({
-      ...entity,
-      provenance: Object.fromEntries(
-        Object.entries(entity.provenance).map(([name, { fetchedAt: _fetchedAt, ...value }]) => [name, value]),
-      ),
+      type: entity.type,
+      id: entity.id,
+      route: entity.route,
+      status: entity.status,
+      fields: entity.fields,
     })),
     routes: snapshot.routes,
     assets: snapshot.assets,
