@@ -1,0 +1,298 @@
+---
+import "../styles/global.css";
+
+const base = import.meta.env.BASE_URL;
+const repo = "https://github.com/Pom4H/migrate";
+const docs = `${repo}#readme`;
+const examples = `${repo}/tree/main/examples`;
+const title = "Migrate — Migration as code for live legacy systems";
+const description = "Keep rebuilding while the legacy system keeps changing. Migrate turns live websites into typed, reviewable domain data with semantic Git diffs and CI checks.";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#090b0a" />
+    <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content="https://pom4h.github.io/migrate/" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+    <link rel="canonical" href="https://pom4h.github.io/migrate/" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap nav">
+        <a class="brand" href="#top" aria-label="Migrate home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M5 7h10m0 0-3-3m3 3-3 3M19 17H9m0 0 3 3m-3-3 3-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span>migrate</span>
+        </a>
+        <nav class="nav-links" aria-label="Primary navigation">
+          <a href="#how">How it works</a>
+          <a href="#git">Git-native</a>
+          <a href={docs}>Docs</a>
+          <a class="nav-cta" href={repo}>GitHub ↗</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="wrap hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow">Migration as code</div>
+            <h1>Rebuild without freezing the old system.</h1>
+            <p>
+              Migrate turns a live legacy website into typed, reviewable domain data, keeps durable improvements separate, and makes every sync a semantic Git diff.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href={repo}>View on GitHub <span aria-hidden="true">↗</span></a>
+              <a class="button" href={docs}>Read the docs</a>
+            </div>
+            <div class="install mono" aria-label="Install from GitHub">
+              <span class="prompt">$</span>
+              <span>bun add -d github:Pom4H/migrate</span>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-label="Semantic diff example">
+            <div class="diff-window">
+              <div class="window-bar mono">
+                <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span>sync / catalog</span>
+                <span>clean</span>
+              </div>
+              <div class="diff-body">
+                <div class="diff-label mono">Raw scraper noise</div>
+                <div class="noise">
+                  <div class="metric bad">
+                    <strong>+45,694</strong>
+                    <small>lines added</small>
+                  </div>
+                  <div class="metric bad">
+                    <strong>−42,484</strong>
+                    <small>lines removed</small>
+                  </div>
+                </div>
+
+                <div class="diff-label mono">Migrate semantic diff</div>
+                <ul class="semantic-diff mono">
+                  <li><span class="plus">+</span><span>product / new-filter-coffee</span><em>added</em></li>
+                  <li><span class="plus">+</span><span>product / seasonal-espresso</span><em>added</em></li>
+                  <li><span class="tilde">~</span><span>product / house-blend</span><em>price</em></li>
+                  <li><span class="muted">·</span><span>927 entities</span><em>unchanged</em></li>
+                </ul>
+                <div class="summary-strip">
+                  <span>+6 added</span>
+                  <span>~3 changed</span>
+                  <span>−0 removed</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="how">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="kicker">The loop</div>
+            <div>
+              <h2>The replacement can evolve while production keeps moving.</h2>
+              <p class="section-intro">
+                Treat migration as a repeatable program instead of a one-time export. Source truth is observed, normalized, overlaid with product decisions, checked, and reviewed again tomorrow.
+              </p>
+            </div>
+          </div>
+
+          <div class="pipeline" aria-label="Migrate pipeline">
+            <article class="pipe-step">
+              <div class="step-no">01 / OBSERVE</div>
+              <h3>Read the live source</h3>
+              <p>Sitemaps, routes, HTML, APIs, or your own adapter.</p>
+            </article>
+            <article class="pipe-step">
+              <div class="step-no">02 / EXTRACT</div>
+              <h3>Build typed entities</h3>
+              <p>Products, pages, articles, assets, routes — with explicit identity.</p>
+            </article>
+            <article class="pipe-step">
+              <div class="step-no">03 / OVERLAY</div>
+              <h3>Keep decisions durable</h3>
+              <p>Human improvements live in overrides, never inside generated data.</p>
+            </article>
+            <article class="pipe-step">
+              <div class="step-no">04 / CHECK</div>
+              <h3>Guard invariants</h3>
+              <p>Catch broken routes, duplicates, orphaned overrides, and mass removals.</p>
+            </article>
+            <article class="pipe-step">
+              <div class="step-no">05 / REVIEW</div>
+              <h3>Merge the diff</h3>
+              <p>Git shows domain changes instead of crawl timestamps and rewritten blobs.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="kicker">Why Migrate</div>
+            <div>
+              <h2>Scraping is the transport. The product is controlled change.</h2>
+            </div>
+          </div>
+
+          <div class="feature-grid">
+            <article class="feature-card">
+              <div class="icon" aria-hidden="true">id</div>
+              <h3>Stable domain identity</h3>
+              <p>Entities are addressed by <span class="mono">(type, id)</span>, not array position or crawl order. A page moving does not rewrite the catalog.</p>
+            </article>
+            <article class="feature-card">
+              <div class="icon" aria-hidden="true">Δ</div>
+              <h3>Semantic fingerprints</h3>
+              <p>Fetch time, headers, and raw HTML churn stay outside the Git-facing state. Fingerprints change when normalized domain data changes.</p>
+            </article>
+            <article class="feature-card">
+              <div class="icon" aria-hidden="true">±</div>
+              <h3>Durable overrides</h3>
+              <p>Rename, enrich, reroute, archive, remove, or create entities without forking the generated source truth.</p>
+            </article>
+            <article class="feature-card">
+              <div class="icon" aria-hidden="true">CI</div>
+              <h3>Migration harness for agents</h3>
+              <p>Checks and deterministic output give coding agents a tight loop: sync, inspect, modify, build, and prove the replacement still matches reality.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap code-layout">
+          <div class="code-copy">
+            <div class="kicker">Configuration is code</div>
+            <h2>Describe the domain in TypeScript.</h2>
+            <p>
+              The DSL stays small on purpose. Use selectors for the common path and drop into ordinary TypeScript when the legacy system gets weird.
+            </p>
+            <ul class="code-points">
+              <li>Bun 1.4 runtime</li>
+              <li>TypeScript 7</li>
+              <li>No LLM required at sync time</li>
+              <li>Custom source adapters and extractors</li>
+            </ul>
+          </div>
+
+          <div class="code-card" aria-label="Migrate TypeScript example">
+            <div class="window-bar mono">
+              <span>migrate.config.ts</span>
+              <span>typed</span>
+            </div>
+            <pre><code><span class="kw">import</span> &#123; defineMigration, entity, field, website &#125;
+  <span class="kw">from</span> <span class="str">"@pom4h/migrate"</span>;
+
+<span class="kw">export default</span> <span class="fn">defineMigration</span>(&#123;
+  <span class="prop">name</span>: <span class="str">"catalog"</span>,
+  <span class="prop">source</span>: <span class="fn">website</span>(<span class="str">"https://legacy.example.com"</span>, &#123;
+    <span class="prop">discover</span>: [<span class="str">"sitemap"</span>, <span class="str">"links"</span>],
+  &#125;),
+
+  <span class="prop">entities</span>: [
+    <span class="fn">entity</span>(<span class="str">"product"</span>, &#123;
+      <span class="prop">match</span>: <span class="str">"/catalog/:category/:slug"</span>,
+      <span class="prop">id</span>: field.<span class="fn">param</span>(<span class="str">"slug"</span>),
+      <span class="prop">fields</span>: &#123;
+        <span class="prop">title</span>: field.<span class="fn">text</span>(<span class="str">"h1"</span>),
+        <span class="prop">price</span>: field.<span class="fn">money</span>(<span class="str">".price"</span>),
+        <span class="prop">image</span>: field.<span class="fn">attr</span>(<span class="str">"img"</span>, <span class="str">"src"</span>, &#123;
+          <span class="prop">absolute</span>: <span class="kw">true</span>,
+        &#125;),
+      &#125;,
+      <span class="prop">assetFields</span>: [<span class="str">"image"</span>],
+    &#125;),
+  ],
+&#125;);</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="git">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="kicker">Git-native storage</div>
+            <div>
+              <h2>Version the domain, not the crawler.</h2>
+              <p class="section-intro">Generated output is shaped for code review from the start. The repository becomes a readable history of the migration.</p>
+            </div>
+          </div>
+
+          <div class="git-grid">
+            <article class="git-card">
+              <span class="mono">entities/
+  product/
+    house-blend.json
+    new-filter.json
+    seasonal.json</span>
+              <h3>One entity, one file</h3>
+              <p>Add a product and Git adds a product. Change a field and the diff stays inside that entity.</p>
+            </article>
+            <article class="git-card">
+              <span class="mono">raw/        ignored
+state/      ignored
+generated/  reviewed
+overrides.ts human-owned</span>
+              <h3>Observation ≠ source control</h3>
+              <p>Raw responses and transient state are evidence for a run, not permanent noise in every commit.</p>
+            </article>
+            <article class="git-card">
+              <span class="mono">Source diff:
++6  added
+~3  changed
+-0  removed
+927 unchanged</span>
+              <h3>Diffs agents can reason about</h3>
+              <p>Small semantic changes are easier to review, test, summarize, and safely automate in CI.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta">
+        <div class="wrap">
+          <div class="cta-box">
+            <div>
+              <div class="eyebrow">Open source · MIT</div>
+              <h2>Let the legacy system keep changing. Keep shipping the replacement.</h2>
+            </div>
+            <div class="cta-actions">
+              <a class="button primary" href={repo}>Open repository <span aria-hidden="true">↗</span></a>
+              <a class="button" href={examples}>Explore examples</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap footer-row">
+        <div>migrate · migration as code · MIT</div>
+        <div class="footer-links">
+          <a href={docs}>Docs</a>
+          <a href={examples}>Examples</a>
+          <a href={repo}>GitHub</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
