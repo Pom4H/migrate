@@ -199,30 +199,30 @@ const description = "Keep rebuilding while the legacy system keeps changing. Mig
               <span>migrate.config.ts</span>
               <span>typed</span>
             </div>
-            <pre><code><span class="kw">import</span> { defineMigration, entity, field, website }
+            <pre><code><span class="kw">import</span> &#123; defineMigration, entity, field, website &#125;
   <span class="kw">from</span> <span class="str">"@pom4h/migrate"</span>;
 
-<span class="kw">export default</span> <span class="fn">defineMigration</span>({
+<span class="kw">export default</span> <span class="fn">defineMigration</span>(&#123;
   <span class="prop">name</span>: <span class="str">"catalog"</span>,
-  <span class="prop">source</span>: <span class="fn">website</span>(<span class="str">"https://legacy.example.com"</span>, {
+  <span class="prop">source</span>: <span class="fn">website</span>(<span class="str">"https://legacy.example.com"</span>, &#123;
     <span class="prop">discover</span>: [<span class="str">"sitemap"</span>, <span class="str">"links"</span>],
-  }),
+  &#125;),
 
   <span class="prop">entities</span>: [
-    <span class="fn">entity</span>(<span class="str">"product"</span>, {
+    <span class="fn">entity</span>(<span class="str">"product"</span>, &#123;
       <span class="prop">match</span>: <span class="str">"/catalog/:category/:slug"</span>,
       <span class="prop">id</span>: field.<span class="fn">param</span>(<span class="str">"slug"</span>),
-      <span class="prop">fields</span>: {
+      <span class="prop">fields</span>: &#123;
         <span class="prop">title</span>: field.<span class="fn">text</span>(<span class="str">"h1"</span>),
         <span class="prop">price</span>: field.<span class="fn">money</span>(<span class="str">".price"</span>),
-        <span class="prop">image</span>: field.<span class="fn">attr</span>(<span class="str">"img"</span>, <span class="str">"src"</span>, {
+        <span class="prop">image</span>: field.<span class="fn">attr</span>(<span class="str">"img"</span>, <span class="str">"src"</span>, &#123;
           <span class="prop">absolute</span>: <span class="kw">true</span>,
-        }),
-      },
+        &#125;),
+      &#125;,
       <span class="prop">assetFields</span>: [<span class="str">"image"</span>],
-    }),
+    &#125;),
   ],
-});</code></pre>
+&#125;);</code></pre>
           </div>
         </div>
       </section>
