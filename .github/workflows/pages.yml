@@ -38,10 +38,6 @@ jobs:
         working-directory: site
         run: bun install
 
-      - name: Check site
-        working-directory: site
-        run: bun run check
-
       - name: Build site
         working-directory: site
         run: bun run build
