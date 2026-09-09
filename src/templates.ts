@@ -61,6 +61,10 @@ permissions:
   contents: write
   pull-requests: write
 
+concurrency:
+  group: migrate-source-sync
+  cancel-in-progress: true
+
 jobs:
   sync:
     runs-on: ubuntu-latest
